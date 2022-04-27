@@ -13,7 +13,9 @@ function traverseAst(ast, locations) {
         if(node.callee.type == 'IdentifierExpression' && node.callee.name == 'describe'){
             console.log(`test name: ${node.arguments[0].value}`)
         }
-
+        else if(node.callee.type == 'StaticMemberExpression' && node.callee.property == 'get'){
+          console.log(`Selectors: ${node.arguments[0].value}`);
+        }
       }
     },
   });
