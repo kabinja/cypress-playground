@@ -6,13 +6,16 @@
   "directories": {
     "test": "tests"
   },
-  "dependencies": {},
+  "dependencies": {
+    "shift-traverser": "^1.0.0"
+  },
   "devDependencies": {
-    "cypress": "^9.6.0"
+    "cypress": "^9.6.0",
+    "shift-parser": "^8.0.0"
   },
   "scripts": {
     "test": "npx cypress run"
   },
-  "author": "",
+  "author": "kabinja",
   "license": "MIT"
 }
