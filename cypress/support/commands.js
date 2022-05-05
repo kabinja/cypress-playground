@@ -30,6 +30,7 @@ Cypress.Commands.add(
     prevSubject: true,
   },
   (subject) => {
-    cy.log("The subject is", subject).then(() => subject);
+    localStorage.setItem('subject', Object.keys(subject));
+    expect(localStorage.getItem('subject')).to.eq('red');
   }
 );

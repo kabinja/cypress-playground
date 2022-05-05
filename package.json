@@ -11,8 +11,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
-    "babelify": "^10.0.0",
-    "browserify": "^17.0.0",
+    "@cypress/browserify-preprocessor": "^3.0.2",
     "cypress": "^9.6.0",
     "shift-parser": "^8.0.0"
   },

@@ -20,6 +20,7 @@ function traverseAst(ast, locations) {
           node.callee.property == "get"
         ) {
           console.log(`Selectors: ${node.arguments[0].value}`);
+          console.log(JSON.stringify(node));
         }
       }
     },
@@ -43,29 +44,15 @@ function instrument(content) {
   }
 }
 
-function domRecorder(file) {
-  const { filePath, outputPath } = file;
-  console.log(filePath);
+async function domRecorder(file) {
+  const { outputPath } = file;
 
-  const browserify = require("browserify")();
-  browserify.add(filePath);
-
-  var content = "";
-  browserify
-    .transform("babelify", {
-      presets: ["@babel/preset-env", {"modules": "cjs"}],
-    })
-    .bundle()
-    .on("data", function (data) {
-      content += data.toString();
-    })
-    .on("end", () => {
-      const instrumented = instrument(content);
-      console.log(content);
-      fs.writeFileSync(outputPath, instrumented, "utf8");
-    });
-
-  console.log(outputPath);
+  const browserify = require('@cypress/browserify-preprocessor')();
+  await browserify(file);
+  
+  const content = getContent(outputPath);
+  const instrumented = instrument(content);
+  fs.writeFileSync(outputPath, instrumented, "utf8");
 
   return outputPath;
 }
